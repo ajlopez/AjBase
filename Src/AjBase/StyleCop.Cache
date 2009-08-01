@@ -1,0 +1,71 @@
+<stylecopresultscache>
+  <version>10</version>
+  <sourcecode name="Column.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>08/01/2009 13:52:26</timestamp>
+      <milliseconds>663</milliseconds>
+    </settings>
+    <timestamp>08/01/2009 13:51:37</timestamp>
+    <milliseconds>968</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="AssemblyInfo.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>08/01/2009 13:52:26</timestamp>
+      <milliseconds>663</milliseconds>
+    </settings>
+    <timestamp>08/01/2009 13:42:33</timestamp>
+    <milliseconds>836</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="Row.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>08/01/2009 13:52:26</timestamp>
+      <milliseconds>663</milliseconds>
+    </settings>
+    <timestamp>08/01/2009 13:45:34</timestamp>
+    <milliseconds>29</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="Schema.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>08/01/2009 13:52:26</timestamp>
+      <milliseconds>663</milliseconds>
+    </settings>
+    <timestamp>08/01/2009 13:50:59</timestamp>
+    <milliseconds>115</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="Table.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>08/01/2009 13:52:26</timestamp>
+      <milliseconds>663</milliseconds>
+    </settings>
+    <timestamp>08/01/2009 13:50:48</timestamp>
+    <milliseconds>369</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="Database.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>08/01/2009 13:52:26</timestamp>
+      <milliseconds>663</milliseconds>
+    </settings>
+    <timestamp>08/01/2009 13:53:46</timestamp>
+    <milliseconds>896</milliseconds>
+    <violations>
+      <violation namespace="Microsoft.StyleCop.CSharp.OrderingRules" rule="ElementsMustAppearInTheCorrectOrder" ruleCheckId="SA1201">
+        <context>All methods must be placed after all constructors.</context>
+        <line>18</line>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="Microsoft.StyleCop.CSharp.OrderingRules" rule="ElementsMustAppearInTheCorrectOrder" ruleCheckId="SA1201">
+        <context>All methods must be placed after all properties.</context>
+        <line>23</line>
+        <warning>False</warning>
+      </violation>
+    </violations>
+  </sourcecode>
+  <project key="-892161434">
+    <configuration>DEBUG;TRACE</configuration>
+  </project>
+</stylecopresultscache>
