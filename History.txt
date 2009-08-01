@@ -4,3 +4,4 @@ Initial project in ajcodekatas
 Database, w/initial tests
 Schema, w/initial tests
 Table, w/initial tests
+Column, w/initial tests

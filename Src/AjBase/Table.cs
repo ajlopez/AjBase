@@ -17,16 +17,21 @@
             this.name = name;
         }
 
-        internal Table(Database database, string name)
-        {
-            this.schema = database.GetDefaultSchema();
-            this.name = name;
-        }
-
         public string Name { get { return this.name; } }
 
         public Schema Schema { get { return this.schema; } }
 
         public Database Database { get { return this.schema.Database; } }
+
+        public void AddColumn(Column column)
+        {
+            this.columns.Add(column);
+            column.SetTable(this);
+        }
+
+        public Column GetColumn(string name)
+        {
+            return this.columns.Single(c => c.Name.Equals(name, StringComparison.InvariantCultureIgnoreCase));
+        }
     }
 }

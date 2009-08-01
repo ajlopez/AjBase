@@ -9,9 +9,31 @@
     {
         private Table table;
         private string name;
+        private Type type;
+
+        public Column(string name)
+            : this(name, null)
+        {
+        }
+
+        public Column(string name, Type type)
+        {
+            this.name = name;
+            this.type = type;
+        }
 
         public string Name { get { return this.name; } }
 
         public Table Table { get { return this.table; } }
+
+        public Type Type { get { return this.type; } }
+
+        internal void SetTable(Table table)
+        {
+            if (this.table != null)
+                throw new InvalidOperationException(string.Format("Column '{0}' is associated to Table '{1}'", this.name, this.table.Name));
+
+            this.table = table;
+        }
     }
 }
