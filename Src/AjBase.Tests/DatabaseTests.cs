@@ -12,38 +12,83 @@
     [TestClass]
     public class DatabaseTests
     {
+        private Engine engine;
+        private Database database;
+
         [TestInitialize]
         public void SetUpDatabase()
         {
-            Database.Initialize();
+            this.engine = new Engine();
+            this.database = this.engine.CreateDatabase("foo");
         }
 
         [TestMethod]
-        public void CreateDatabase()
+        public void VerifyCreatedDatabase()
         {
-            Database db = Database.Create("foo");
+            Assert.IsNotNull(this.database);
+            Assert.AreEqual("foo", this.database.Name);
+            Assert.IsTrue(this.engine == this.database.Engine);
 
-            Assert.IsNotNull(db);
-            Assert.AreEqual("foo", db.Name);
+            Schema schema = this.database.GetSchema(Database.DefaultSchemaName);
+            Assert.IsNotNull(schema);
+            Assert.AreEqual(Database.DefaultSchemaName, schema.Name);
+            Assert.IsTrue(this.database == schema.Database);
         }
 
         [TestMethod]
-        public void CreateAndGetDatabase()
+        public void GetCreatedDatabase()
         {
-            Database.Create("foo");
-
-            Database db = Database.Get("foo");
+            Database db = this.engine.GetDatabase("foo");
 
             Assert.IsNotNull(db);
             Assert.AreEqual("foo", db.Name);
+            Assert.IsTrue(this.database == db);
         }
 
         [TestMethod]
         [ExpectedException(typeof(InvalidOperationException))]
         public void RaiseIfDatabaseAlreadyExists()
         {
-            Database.Create("foo");
-            Database.Create("foo");
+            this.engine.CreateDatabase("foo");
+            this.engine.CreateDatabase("foo");
+        }
+
+        [TestMethod]
+        public void CreateNewSchema()
+        {
+            Schema schema = this.database.CreateSchema("bar");
+
+            Assert.IsNotNull(schema);
+            Assert.AreEqual("bar", schema.Name);
+            Assert.IsTrue(this.database == schema.Database);
+        }
+
+        [TestMethod]
+        public void GetDefaultSchema()
+        {
+            Schema schema = this.database.GetDefaultSchema();
+
+            Assert.IsNotNull(schema);
+            Assert.AreEqual(Database.DefaultSchemaName, schema.Name);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void RaiseIfSchemaAlreadyExists()
+        {
+            this.database.CreateSchema("bar");
+            this.database.CreateSchema("bar");
+        }
+
+        [TestMethod]
+        public void CreateTableInDefaultSchema()
+        {
+            Table table = this.database.CreateTable("customers");
+
+            Assert.IsNotNull(table);
+            Assert.AreEqual("customers", table.Name);
+            Assert.IsTrue(this.database == table.Database);
+            Assert.IsTrue(this.database.GetDefaultSchema() == table.Schema);
         }
     }
 }

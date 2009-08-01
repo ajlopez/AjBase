@@ -9,10 +9,24 @@
     {
         private string name;
         private Schema schema;
-        private List<Column> columns;
+        private List<Column> columns = new List<Column>();
+
+        internal Table(Schema schema, string name)
+        {
+            this.schema = schema;
+            this.name = name;
+        }
+
+        internal Table(Database database, string name)
+        {
+            this.schema = database.GetDefaultSchema();
+            this.name = name;
+        }
 
         public string Name { get { return this.name; } }
 
         public Schema Schema { get { return this.schema; } }
+
+        public Database Database { get { return this.schema.Database; } }
     }
 }

@@ -7,40 +7,49 @@
 
     public class Database
     {
-        private static Dictionary<string, Database> databases = new Dictionary<string, Database>();
-
         private string name;
+        private Engine engine;
+
         private Dictionary<string, Schema> schemas = new Dictionary<string,Schema>();
 
         public const string DefaultSchemaName = "dbo";
 
-        public static void Initialize()
-        {
-            databases.Clear();
-        }
-
-        public static Database Create(string name)
-        {
-            if (databases.ContainsKey(name))
-                throw new InvalidOperationException(string.Format("Database {0} already exists", name));
-
-            Database db = new Database(name);
-
-            databases[name] = db;
-
-            return db;
-        }
-
-        public static Database Get(string name)
-        {
-            return databases[name];
-        }
-
-        private Database(string name)
+        internal Database(Engine engine, string name)
         {
             this.name = name;
+            this.engine = engine;
+            this.CreateSchema(Database.DefaultSchemaName);
         }
 
         public string Name { get { return this.name; } }
+
+        public Engine Engine { get { return this.engine; } }
+
+        public Schema GetSchema(string name)
+        {
+            return this.schemas[name];
+        }
+
+        public Schema GetDefaultSchema()
+        {
+            return this.GetSchema(Database.DefaultSchemaName);
+        }
+
+        public Schema CreateSchema(string name)
+        {
+            if (this.schemas.ContainsKey(name))
+                throw new InvalidOperationException(string.Format("Schema '{0}' already exists in Database '{0}'", name, this.name));
+
+            Schema schema = new Schema(this, name);
+
+            this.schemas[name] = schema;
+
+            return schema;
+        }
+
+        public Table CreateTable(string name)
+        {
+            return this.GetDefaultSchema().CreateTable(name);
+        }
     }
 }
