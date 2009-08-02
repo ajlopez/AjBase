@@ -49,6 +49,23 @@
             this.table.AddColumn(column);
 
             Assert.IsTrue(this.table == column.Table);
+            Assert.AreEqual(0, column.Position);
+        }
+
+        [TestMethod]
+        public void AddTwoColumnToTable()
+        {
+            Column column = new Column("FirstName", typeof(string));
+            Column column2 = new Column("LastName", typeof(string));
+
+            this.table.AddColumn(column);
+            this.table.AddColumn(column2);
+
+            Assert.IsTrue(this.table == column.Table);
+            Assert.AreEqual(0, column.Position);
+
+            Assert.IsTrue(this.table == column2.Table);
+            Assert.AreEqual(1, column2.Position);
         }
 
         [TestMethod]

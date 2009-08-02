@@ -10,6 +10,7 @@
         private Table table;
         private string name;
         private Type type;
+        private int position;
 
         public Column(string name)
             : this(name, null)
@@ -28,12 +29,15 @@
 
         public Type Type { get { return this.type; } }
 
-        internal void SetTable(Table table)
+        public int Position { get { return this.position; } }
+
+        internal void SetTable(Table table, int position)
         {
             if (this.table != null)
                 throw new InvalidOperationException(string.Format("Column '{0}' is associated to Table '{1}'", this.name, this.table.Name));
 
             this.table = table;
+            this.position = position;
         }
     }
 }

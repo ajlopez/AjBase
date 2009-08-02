@@ -5,3 +5,10 @@ Database, w/initial tests
 Schema, w/initial tests
 Table, w/initial tests
 Column, w/initial tests
+
+2009-08-02
+Column.AddRow w/tests
+Table.ApplyFilter w/tests
+IRowFilter
+IsNullFilter
+AreEqualsFilter

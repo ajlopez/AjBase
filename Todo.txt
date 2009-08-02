@@ -1,0 +1,11 @@
+
+Implements:
+RowFunction<T> : Func<Row,T>
+RowPredicate : RowFunction<bool>
+
+Research on Linq, IQueryable
+
+SQL Parser and evaluator
+
+ADO.NET Provider
+
