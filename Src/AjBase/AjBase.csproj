@@ -55,6 +55,15 @@
     <Compile Include="Row.cs" />
     <Compile Include="RowList.cs" />
     <Compile Include="Schema.cs" />
+    <Compile Include="Sql\CreateDatabaseCommand.cs" />
+    <Compile Include="Sql\EndOfInputException.cs" />
+    <Compile Include="Sql\ICommand.cs" />
+    <Compile Include="Sql\Lexer.cs" />
+    <Compile Include="Sql\LexerException.cs" />
+    <Compile Include="Sql\Parser.cs" />
+    <Compile Include="Sql\ParserException.cs" />
+    <Compile Include="Sql\Token.cs" />
+    <Compile Include="Sql\TokenType.cs" />
     <Compile Include="Table.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
