@@ -32,5 +32,10 @@
 
             return table;
         }
+
+        public Table GetTable(string name)
+        {
+            return this.tables[name];
+        }
     }
 }

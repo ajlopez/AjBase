@@ -51,5 +51,10 @@
         {
             return this.GetDefaultSchema().CreateTable(name);
         }
+
+        public Table GetTable(string name)
+        {
+            return this.GetDefaultSchema().GetTable(name);
+        }
     }
 }

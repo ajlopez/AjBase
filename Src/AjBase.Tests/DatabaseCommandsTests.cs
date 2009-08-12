@@ -24,25 +24,25 @@
         [TestMethod]
         public void ExecuteCreateDatabaseCommand()
         {
-            CreateDatabaseCommand cmd = new CreateDatabaseCommand("Northwind");
+            CreateDatabaseCommand cmd = new CreateDatabaseCommand("foo");
 
             cmd.Execute(this.engine);
 
-            Database database = this.engine.GetDatabase("Northwind");
+            Database database = this.engine.GetDatabase("foo");
             Assert.IsNotNull(database);
-            Assert.AreEqual("Northwind", database.Name);
+            Assert.AreEqual("foo", database.Name);
         }
 
         [TestMethod]
         public void ParseAndExecuteCreateDatabaseCommand()
         {
-            CreateDatabaseCommand cmd = (CreateDatabaseCommand) GetCommand("create database Northwind");
+            CreateDatabaseCommand cmd = (CreateDatabaseCommand) GetCommand("create database foo");
 
             cmd.Execute(this.engine);
 
-            Database database = this.engine.GetDatabase("Northwind");
+            Database database = this.engine.GetDatabase("foo");
             Assert.IsNotNull(database);
-            Assert.AreEqual("Northwind", database.Name);
+            Assert.AreEqual("foo", database.Name);
         }
 
         private static ICommand GetCommand(string text)

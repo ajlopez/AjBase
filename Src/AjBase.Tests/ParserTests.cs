@@ -67,6 +67,26 @@
             Assert.AreEqual("Northwind", create.Name);
         }
 
+        [TestMethod]
+        public void CompileCreateTable()
+        {
+            ICommand cmd = Compile("create table Customers(name,address)");
+
+            Assert.IsNotNull(cmd);
+            Assert.IsInstanceOfType(cmd, typeof(CreateTableCommand));
+
+            CreateTableCommand create = (CreateTableCommand)cmd;
+
+            Assert.AreEqual("Customers", create.Name);
+
+            ICollection<Column> columns = create.Columns;
+
+            Assert.IsNotNull(columns);
+            Assert.AreEqual(2, columns.Count);
+            Assert.AreEqual("name", columns.ElementAt(0).Name);
+            Assert.AreEqual("address", columns.ElementAt(1).Name);
+        }
+
         private static ICommand Compile(string text)
         {
             Parser parser = new Parser(text);

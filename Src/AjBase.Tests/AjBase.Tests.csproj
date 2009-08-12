@@ -48,6 +48,7 @@
     <Compile Include="LexerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SchemaTests.cs" />
+    <Compile Include="TableCommandsTests.cs" />
     <Compile Include="TableTests.cs" />
   </ItemGroup>
   <ItemGroup>

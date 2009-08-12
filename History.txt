@@ -18,3 +18,4 @@ AjBase.Sql
 Lexer, Parser with Tests
 ICommand
 CreateDatabaseCommand
+CreateTableCommand
