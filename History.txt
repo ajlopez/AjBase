@@ -19,3 +19,7 @@ Lexer, Parser with Tests
 ICommand
 CreateDatabaseCommand
 CreateTableCommand
+
+2009-08-12
+InsertCommand
+Parser support for simple insert without column names

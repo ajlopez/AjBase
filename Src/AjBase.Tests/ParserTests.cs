@@ -87,6 +87,19 @@
             Assert.AreEqual("address", columns.ElementAt(1).Name);
         }
 
+        [TestMethod]
+        public void CompileSimpleInsertWithValues()
+        {
+            ICommand cmd = Compile("insert into Customers('Name 1', 'Address 1')");
+
+            Assert.IsNotNull(cmd);
+            Assert.IsInstanceOfType(cmd, typeof(InsertCommand));
+
+            InsertCommand insert = (InsertCommand)cmd;
+
+            Assert.AreEqual("Customers", insert.TableName);
+        }
+
         private static ICommand Compile(string text)
         {
             Parser parser = new Parser(text);

@@ -59,6 +59,7 @@
     <Compile Include="Sql\CreateTableCommand.cs" />
     <Compile Include="Sql\EndOfInputException.cs" />
     <Compile Include="Sql\ICommand.cs" />
+    <Compile Include="Sql\InsertCommand.cs" />
     <Compile Include="Sql\Lexer.cs" />
     <Compile Include="Sql\LexerException.cs" />
     <Compile Include="Sql\Parser.cs" />

@@ -36,6 +36,9 @@
             if (IsToken(token, "create", TokenType.Name))
                 return ParseCreate();
 
+            if (IsName(token, "insert"))
+                return ParseInsert();
+
             throw new ParserException(string.Format("Unexpected '{0}'", token.Value));
         }
 
@@ -79,6 +82,45 @@
             }
 
             return cmd;
+        }
+
+        private ICommand ParseInsert()
+        {
+            Parse("into", TokenType.Name);
+            string tableName = ParseName();
+
+            InsertCommand cmd = new InsertCommand(tableName);
+
+            Parse("(", TokenType.Separator);
+
+            object value = ParseValue();
+
+            cmd.AddValue(value);
+
+            while (!TryParse(")", TokenType.Separator))
+            {
+                Parse(",", TokenType.Separator);
+                value = ParseValue();
+                cmd.AddValue(value);
+            }
+
+            return cmd;
+        }
+
+        private object ParseValue()
+        {
+            Token token = this.lexer.NextToken();
+
+            if (token == null)
+                throw new ParserException("Unexpected end of input");
+
+            if (token.TokenType == TokenType.String)
+                return token.Value;
+
+            if (token.TokenType == TokenType.Integer)
+                return int.Parse(token.Value);
+
+            throw new ParserException(string.Format("Unexpected '{0}'", token.Value));
         }
 
         private Column ParseColumnDefinition()

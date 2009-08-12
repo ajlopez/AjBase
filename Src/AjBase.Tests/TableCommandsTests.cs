@@ -61,5 +61,12 @@
 
             return parser.ParseCommand();
         }
+
+        private void GetAndExecuteCommand(string text)
+        {
+            ICommand cmd = GetCommand(text);
+
+            cmd.Execute(this.database);
+        }
     }
 }
