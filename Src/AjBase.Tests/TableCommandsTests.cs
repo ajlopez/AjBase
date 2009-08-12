@@ -55,6 +55,46 @@
             Assert.IsNotNull(table.GetColumn("Address"));
         }
 
+        [TestMethod]
+        public void ParseAndExecuteInsertCommand()
+        {
+            GetAndExecuteCommand("create table Customers(Name, Address)");
+            Table table = this.database.GetTable("Customers");
+            Assert.IsNotNull(table);
+            Assert.AreEqual(0, table.RowCount);
+
+            InsertCommand cmd = (InsertCommand)GetCommand("insert into Customers('Name 1', 'Address 1')");
+
+            cmd.Execute(this.database);
+
+            Assert.AreEqual(1, table.RowCount);
+
+            Row row = table.GetRow(0);
+
+            Assert.AreEqual("Name 1", row["Name"]);
+            Assert.AreEqual("Address 1", row["Address"]);
+        }
+
+        [TestMethod]
+        public void ParseAndExecuteInsertCommandWithColumnNames()
+        {
+            GetAndExecuteCommand("create table Customers(Name, Address)");
+            Table table = this.database.GetTable("Customers");
+            Assert.IsNotNull(table);
+            Assert.AreEqual(0, table.RowCount);
+
+            InsertCommand cmd = (InsertCommand)GetCommand("insert into Customers(Name, Address) values('Name 1', 'Address 1')");
+
+            cmd.Execute(this.database);
+
+            Assert.AreEqual(1, table.RowCount);
+
+            Row row = table.GetRow(0);
+
+            Assert.AreEqual("Name 1", row["Name"]);
+            Assert.AreEqual("Address 1", row["Address"]);
+        }
+
         private static ICommand GetCommand(string text)
         {
             Parser parser = new Parser(text);

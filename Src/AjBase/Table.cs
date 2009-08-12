@@ -55,6 +55,11 @@
             return row;
         }
 
+        public RowList GetRows()
+        {
+            return new RowList(this.rows);
+        }
+
         public RowList ApplyFilter(IRowFilter filter)
         {
             return this.rows.ApplyFilter(filter);

@@ -93,6 +93,23 @@
 
             Parse("(", TokenType.Separator);
 
+            if (TryPeekName())
+            {
+                string columnName = ParseName();
+
+                cmd.AddColumn(columnName);
+
+                while (!TryParse(")", TokenType.Separator))
+                {
+                    Parse(",", TokenType.Separator);
+                    columnName = ParseName();
+                    cmd.AddColumn(columnName);
+                }
+
+                Parse("values", TokenType.Name);
+                Parse("(", TokenType.Separator);
+            }
+
             object value = ParseValue();
 
             cmd.AddValue(value);
@@ -105,6 +122,18 @@
             }
 
             return cmd;
+        }
+
+        private bool TryPeekName()
+        {
+            Token token = this.lexer.NextToken();
+
+            if (token == null)
+                return false;
+
+            this.lexer.PushToken(token);
+
+            return token.TokenType == TokenType.Name;
         }
 
         private object ParseValue()
