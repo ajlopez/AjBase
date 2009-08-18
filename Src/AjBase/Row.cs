@@ -8,12 +8,12 @@
     public class Row
     {
         private object[] data;
-        private Table table;
+        private IRowDefinition rowDefinition;
 
-        internal Row(Table table, object[] data)
+        internal Row(IRowDefinition rowDefinition, object[] data)
         {
-            this.table = table;
-            this.data = new object[this.table.ColumnCount];
+            this.rowDefinition = rowDefinition;
+            this.data = new object[this.rowDefinition.ColumnCount];
 
             for (int k = 0; k < this.data.Length && k < data.Length; k++)
                 this[k] = data[k];
@@ -27,8 +27,8 @@
 
         public object this[string columnName]
         {
-            get { return this[this.table.GetColumn(columnName).Position]; }
-            set { this[this.table.GetColumn(columnName).Position] = value; }
+            get { return this[this.rowDefinition.GetColumn(columnName).Position]; }
+            set { this[this.rowDefinition.GetColumn(columnName).Position] = value; }
         }
     }
 }

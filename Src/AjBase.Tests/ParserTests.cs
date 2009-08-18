@@ -90,7 +90,7 @@
         [TestMethod]
         public void CompileSimpleInsertWithValues()
         {
-            ICommand cmd = Compile("insert into Customers('Name 1', 'Address 1')");
+            ICommand cmd = Compile("insert into Customers values('Name 1', 'Address 1')");
 
             Assert.IsNotNull(cmd);
             Assert.IsInstanceOfType(cmd, typeof(InsertCommand));
@@ -111,6 +111,19 @@
             InsertCommand insert = (InsertCommand)cmd;
 
             Assert.AreEqual("Customers", insert.TableName);
+        }
+
+        [TestMethod]
+        public void CompileSimpleSelectWithAsterisk()
+        {
+            ICommand cmd = Compile("select * from Customers");
+
+            Assert.IsNotNull(cmd);
+            Assert.IsInstanceOfType(cmd, typeof(SelectCommand));
+
+            SelectCommand select = (SelectCommand)cmd;
+
+            Assert.AreEqual("Customers", select.TableName);
         }
 
         private static ICommand Compile(string text)

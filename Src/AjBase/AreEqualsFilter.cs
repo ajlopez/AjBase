@@ -27,7 +27,7 @@
             if (rowvalue == null)
                 return this.value == null;
 
-            return rowvalue.Equals(value);
+            return rowvalue.Equals(this.value);
         }
     }
 }

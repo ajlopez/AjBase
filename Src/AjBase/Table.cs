@@ -5,7 +5,7 @@
     using System.Linq;
     using System.Text;
 
-    public class Table
+    public class Table : IRowDefinition
     {
         private string name;
         private Schema schema;
@@ -37,6 +37,11 @@
         public Column GetColumn(string name)
         {
             return this.columns.Single(c => c.Name.Equals(name, StringComparison.InvariantCultureIgnoreCase));
+        }
+
+        public Column GetColumn(int ncol)
+        {
+            return this.columns[ncol];
         }
 
         public Row GetRow(int nrow)

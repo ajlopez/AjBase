@@ -10,6 +10,7 @@
     {
         private const string NameCharacters = "_";
         private const string SeparatorCharacters = "(),.";
+        private const string OperatorCharacters = "+-*/=";
 
         private TextReader reader;
         private char lastChar;
@@ -49,6 +50,9 @@
 
                 if (SeparatorCharacters.IndexOf(ch) >= 0)
                     return new Token() { TokenType = TokenType.Separator, Value = ch.ToString() };
+
+                if (OperatorCharacters.IndexOf(ch) >= 0)
+                    return new Token() { TokenType = TokenType.Operator, Value = ch.ToString() };
 
                 if (ch == '\'')
                     return this.NextString();
@@ -114,11 +118,12 @@
             {
                 ch = this.NextChar();
 
-                while (NameCharacters.IndexOf(ch)>=0 || char.IsLetterOrDigit(ch))
+                while (NameCharacters.IndexOf(ch) >= 0 || char.IsLetterOrDigit(ch))
                 {
                     name += ch;
                     ch = this.NextChar();
                 }
+
                 this.PushChar(ch);
             }
             catch (EndOfInputException)

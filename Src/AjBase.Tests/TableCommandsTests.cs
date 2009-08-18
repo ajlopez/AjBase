@@ -63,7 +63,7 @@
             Assert.IsNotNull(table);
             Assert.AreEqual(0, table.RowCount);
 
-            InsertCommand cmd = (InsertCommand)GetCommand("insert into Customers('Name 1', 'Address 1')");
+            InsertCommand cmd = (InsertCommand)GetCommand("insert into Customers values('Name 1', 'Address 1')");
 
             cmd.Execute(this.database);
 

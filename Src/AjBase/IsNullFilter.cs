@@ -16,6 +16,6 @@
             this.position = column.Position;
         }
 
-        public Func<Row, bool> RowPredicate { get { return ((Row r) => r[this.position] == null); } }
+        public Func<Row, bool> RowPredicate { get { return r => r[this.position] == null; } }
     }
 }

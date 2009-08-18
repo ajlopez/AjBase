@@ -5,27 +5,24 @@
     using System.Linq;
     using System.Text;
 
-    public class InsertCommand : ICommand
+    public class SelectCommand : ICommand
     {
         private string tableName;
         private List<string> columnNames = new List<string>();
-        private List<object> values = new List<object>();
+        private RowList result;
 
-        public InsertCommand(string tableName)
+        public SelectCommand(string tableName)
         {
             this.tableName = tableName;
         }
 
         public string TableName { get { return this.tableName; } }
 
+        public RowList Result { get { return this.result; } }
+
         public void AddColumn(string columnName)
         {
             this.columnNames.Add(columnName);
-        }
-
-        public void AddValue(object value)
-        {
-            this.values.Add(value);
         }
 
         #region ICommand Members
@@ -39,20 +36,7 @@
         {
             Table table = database.GetTable(this.tableName);
 
-            if (this.columnNames.Count == 0)
-                table.AddRow(this.values.ToArray());
-            else
-            {
-                object[] allValues = new object[table.ColumnCount];
-
-                for (int k = 0; k < this.columnNames.Count; k++)
-                {
-                    Column column = table.GetColumn(this.columnNames[k]);
-                    allValues[column.Position] = this.values[k];
-                }
-
-                table.AddRow(allValues);
-            }
+            this.result = table.GetRows();
         }
 
         #endregion

@@ -7,12 +7,12 @@
 
     public class Database
     {
+        public const string DefaultSchemaName = "dbo";
+
         private string name;
         private Engine engine;
 
-        private Dictionary<string, Schema> schemas = new Dictionary<string,Schema>();
-
-        public const string DefaultSchemaName = "dbo";
+        private Dictionary<string, Schema> schemas = new Dictionary<string, Schema>();
 
         internal Database(Engine engine, string name)
         {

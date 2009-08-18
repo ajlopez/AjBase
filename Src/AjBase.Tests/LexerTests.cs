@@ -34,7 +34,7 @@
         {
             TestParse("123", "123", TokenType.Integer);
             TestParse(" 4567 ", "4567", TokenType.Integer);
-            TestParse("-100", "-100", TokenType.Integer);
+            TestParse("100", "100", TokenType.Integer);
         }
 
         [TestMethod]
@@ -44,6 +44,16 @@
             TestParse(" , ", ",", TokenType.Separator);
             TestParse("(", "(", TokenType.Separator);
             TestParse(")", ")", TokenType.Separator);
+        }
+
+        [TestMethod]
+        public void ParseOperators()
+        {
+            TestParse("+", "+", TokenType.Operator);
+            TestParse(" -", "-", TokenType.Operator);
+            TestParse("*", "*", TokenType.Operator);
+            TestParse(" /", "/", TokenType.Operator);
+            TestParse("=", "=", TokenType.Operator);
         }
 
         [TestMethod]

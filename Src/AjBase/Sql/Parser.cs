@@ -28,18 +28,40 @@
 
         public ICommand ParseCommand()
         {
-            Token token = lexer.NextToken();
+            Token token = this.lexer.NextToken();
 
             if (token == null)
                 return null;
 
             if (IsToken(token, "create", TokenType.Name))
-                return ParseCreate();
+                return this.ParseCreate();
 
             if (IsName(token, "insert"))
-                return ParseInsert();
+                return this.ParseInsert();
+
+            if (IsName(token, "select"))
+                return this.ParseSelect();
 
             throw new ParserException(string.Format("Unexpected '{0}'", token.Value));
+        }
+
+        private static bool IsName(Token token, string value)
+        {
+            return IsToken(token, value, TokenType.Name);
+        }
+
+        private static bool IsToken(Token token, string value, TokenType type)
+        {
+            if (token == null)
+                return false;
+
+            if (token.TokenType != type)
+                return false;
+
+            if (type == TokenType.Name)
+                return token.Value.Equals(value, StringComparison.InvariantCultureIgnoreCase);
+
+            return token.Value.Equals(value);
         }
 
         private ICommand ParseCreate()
@@ -50,10 +72,10 @@
                 throw new ParserException(string.Format("Unexpected end of input"));
 
             if (IsName(token, "database"))
-                return ParseCreateDatabase();
+                return this.ParseCreateDatabase();
 
             if (IsName(token, "table"))
-                return ParseCreateTable();
+                return this.ParseCreateTable();
 
             throw new ParserException(string.Format("Unexpected '{0}'", token.Value));
         }
@@ -65,20 +87,20 @@
 
         private ICommand ParseCreateTable()
         {
-            string name = ParseName();
+            string name = this.ParseName();
 
             CreateTableCommand cmd = new CreateTableCommand(name);
 
-            Parse("(", TokenType.Separator);
+            this.Parse("(", TokenType.Separator);
 
-            while (!TryParse(")", TokenType.Separator))
+            while (!this.TryParse(")", TokenType.Separator))
             {
-                cmd.AddColumn(ParseColumnDefinition());
+                cmd.AddColumn(this.ParseColumnDefinition());
 
-                if (TryParse(")", TokenType.Separator))
+                if (this.TryParse(")", TokenType.Separator))
                     break;
 
-                Parse(",", TokenType.Separator);
+                this.Parse(",", TokenType.Separator);
             }
 
             return cmd;
@@ -86,42 +108,50 @@
 
         private ICommand ParseInsert()
         {
-            Parse("into", TokenType.Name);
-            string tableName = ParseName();
+            this.Parse("into", TokenType.Name);
+            string tableName = this.ParseName();
 
             InsertCommand cmd = new InsertCommand(tableName);
 
-            Parse("(", TokenType.Separator);
-
-            if (TryPeekName())
+            if (this.TryParse("(", TokenType.Separator))
             {
-                string columnName = ParseName();
+                string columnName = this.ParseName();
 
                 cmd.AddColumn(columnName);
 
-                while (!TryParse(")", TokenType.Separator))
+                while (!this.TryParse(")", TokenType.Separator))
                 {
-                    Parse(",", TokenType.Separator);
-                    columnName = ParseName();
+                    this.Parse(",", TokenType.Separator);
+                    columnName = this.ParseName();
                     cmd.AddColumn(columnName);
                 }
-
-                Parse("values", TokenType.Name);
-                Parse("(", TokenType.Separator);
             }
 
-            object value = ParseValue();
+            this.Parse("values", TokenType.Name);
+            this.Parse("(", TokenType.Separator);
+
+            object value = this.ParseValue();
 
             cmd.AddValue(value);
 
-            while (!TryParse(")", TokenType.Separator))
+            while (!this.TryParse(")", TokenType.Separator))
             {
-                Parse(",", TokenType.Separator);
-                value = ParseValue();
+                this.Parse(",", TokenType.Separator);
+                value = this.ParseValue();
                 cmd.AddValue(value);
             }
 
             return cmd;
+        }
+
+        private ICommand ParseSelect()
+        {
+            this.Parse("*", TokenType.Operator);
+            this.Parse("from", TokenType.Name);
+
+            string tableName = this.ParseName();
+
+            return new SelectCommand(tableName);
         }
 
         private bool TryPeekName()
@@ -154,7 +184,7 @@
 
         private Column ParseColumnDefinition()
         {
-            string name = ParseName();
+            string name = this.ParseName();
 
             return new Column(name);
         }
@@ -212,25 +242,6 @@
                 return token.Value;
 
             throw new ParserException(string.Format("Unexpected '{0}'", token.Value));
-        }
-
-        private static bool IsName(Token token, string value)
-        {
-            return IsToken(token, value, TokenType.Name);
-        }
-
-        private static bool IsToken(Token token, string value, TokenType type)
-        {
-            if (token == null)
-                return false;
-
-            if (token.TokenType != type)
-                return false;
-
-            if (type == TokenType.Name)
-                return token.Value.Equals(value, StringComparison.InvariantCultureIgnoreCase);
-
-            return token.Value.Equals(value);
         }
     }
 }

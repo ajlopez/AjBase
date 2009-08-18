@@ -25,3 +25,8 @@ InsertCommand
 Parser support for simple insert without column names
 Parser support for insert with names and values
 insert execution tests
+
+2009-08-17
+IRowDefinition
+SelectCommand
+select * in Parse.ParseSelect

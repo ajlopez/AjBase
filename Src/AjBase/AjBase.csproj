@@ -49,12 +49,14 @@
     <Compile Include="AreEqualsFilter.cs" />
     <Compile Include="Database.cs" />
     <Compile Include="Engine.cs" />
+    <Compile Include="IRowDefinition.cs" />
     <Compile Include="IRowFilter.cs" />
     <Compile Include="IsNullFilter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Row.cs" />
     <Compile Include="RowList.cs" />
     <Compile Include="Schema.cs" />
+    <Compile Include="Sql\SelectCommand.cs" />
     <Compile Include="Sql\CreateDatabaseCommand.cs" />
     <Compile Include="Sql\CreateTableCommand.cs" />
     <Compile Include="Sql\EndOfInputException.cs" />

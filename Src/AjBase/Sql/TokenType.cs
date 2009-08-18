@@ -5,6 +5,7 @@
         Name,
         String,
         Integer,
-        Separator
+        Separator,
+        Operator
     }
 }
