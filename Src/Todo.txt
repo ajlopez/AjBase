@@ -2,3 +2,7 @@
 - Parse of "-" in ParseInteger
 - Parse of ";" as comment
 
+ADO.NET Implementation
+See
+http://www.sqlskills.com/blogs/bobb/post/Expose-data-through-an-ADONET-data-provider.aspx
+http://sqlite.phxsoftware.com/

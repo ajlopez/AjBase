@@ -48,6 +48,9 @@
     <Compile Include="Column.cs" />
     <Compile Include="AreEqualsFilter.cs" />
     <Compile Include="Database.cs" />
+    <Compile Include="Data\AjBaseConnection.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Engine.cs" />
     <Compile Include="IRowDefinition.cs" />
     <Compile Include="IRowFilter.cs" />

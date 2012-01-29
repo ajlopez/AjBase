@@ -9,6 +9,22 @@
     {
         private Dictionary<string, Database> databases = new Dictionary<string, Database>();
 
+        [ThreadStatic]
+        private static Engine current;
+
+        public static Engine Current
+        {
+            get
+            {
+                return current;
+            }
+
+            set
+            {
+                current = value;
+            }
+        }
+
         public Database CreateDatabase(string name)
         {
             if (this.databases.ContainsKey(name))
@@ -23,6 +39,9 @@
 
         public Database GetDatabase(string name)
         {
+            if (!this.databases.ContainsKey(name))
+                return null;
+
             return this.databases[name];
         }
     }
