@@ -30,3 +30,7 @@ insert execution tests
 IRowDefinition
 SelectCommand
 select * in Parse.ParseSelect
+
+2012-01-29
+Moved to GitHub
+Since then, the history is in the Git log
