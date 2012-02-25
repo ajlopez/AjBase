@@ -1,4 +1,4 @@
-﻿namespace AjBase.Tests
+﻿namespace AjBase.Tests.Sql
 {
     using System;
     using System.Text;
@@ -124,6 +124,22 @@
             SelectCommand select = (SelectCommand)cmd;
 
             Assert.AreEqual("Customers", select.TableName);
+        }
+
+        [TestMethod]
+        public void CompileSimpleSelectWithFieldNames()
+        {
+            ICommand cmd = Compile("select FirstName, LastName from Employees");
+
+            Assert.IsNotNull(cmd);
+            Assert.IsInstanceOfType(cmd, typeof(SelectCommand));
+
+            SelectCommand select = (SelectCommand)cmd;
+
+            Assert.AreEqual("Employees", select.TableName);
+            Assert.AreEqual(2, select.ColumnNames.Count());
+            Assert.AreEqual("FirstName", select.ColumnNames.First());
+            Assert.AreEqual("LastName", select.ColumnNames.Last());
         }
 
         private static ICommand Compile(string text)

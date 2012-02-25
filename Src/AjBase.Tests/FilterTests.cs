@@ -33,7 +33,7 @@
         [TestMethod]
         public void GetRowsWithNullAddress()
         {
-            IRowFilter filter = new IsNullFilter(this.table.GetColumn("Address"));
+            IRowFilter filter = new IsNullFilter(this.table.GetColumnPosition("Address"));
 
             RowList rows = this.table.ApplyFilter(filter);
 
@@ -47,7 +47,7 @@
         [TestMethod]
         public void GetRowsWithNullFirstName()
         {
-            IRowFilter filter = new IsNullFilter(this.table.GetColumn("FirstName"));
+            IRowFilter filter = new IsNullFilter(this.table.GetColumnPosition("FirstName"));
 
             RowList rows = this.table.ApplyFilter(filter);
 
@@ -58,7 +58,7 @@
         [TestMethod]
         public void GetRowWithFirstName()
         {
-            IRowFilter filter = new AreEqualsFilter(this.table.GetColumn("FirstName"), "John 10");
+            IRowFilter filter = new AreEqualsFilter(this.table.GetColumnPosition("FirstName"), "John 10");
 
             RowList rows = this.table.ApplyFilter(filter);
 
@@ -76,7 +76,7 @@
         [TestMethod]
         public void GetRowWithAddress()
         {
-            IRowFilter filter = new AreEqualsFilter(this.table.GetColumn("Address"), "Address 11");
+            IRowFilter filter = new AreEqualsFilter(this.table.GetColumnPosition("Address"), "Address 11");
 
             RowList rows = this.table.ApplyFilter(filter);
 

@@ -41,16 +41,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ColumnTests.cs" />
-    <Compile Include="DatabaseCommandsTests.cs" />
+    <Compile Include="Sql\SelectCommandsTests.cs" />
+    <Compile Include="Sql\DatabaseCommandsTests.cs" />
     <Compile Include="Data\AjBaseConnectionTests.cs" />
     <Compile Include="EngineTests.cs" />
-    <Compile Include="ParserTests.cs" />
-    <Compile Include="DatabaseTests.cs" />
+    <Compile Include="Sql\ParserTests.cs" />
+    <Compile Include="Sql\DatabaseTests.cs" />
     <Compile Include="FilterTests.cs" />
-    <Compile Include="LexerTests.cs" />
+    <Compile Include="Sql\LexerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SchemaTests.cs" />
-    <Compile Include="TableCommandsTests.cs" />
+    <Compile Include="Sql\TableCommandsTests.cs" />
     <Compile Include="TableTests.cs" />
   </ItemGroup>
   <ItemGroup>

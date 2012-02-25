@@ -49,7 +49,6 @@
             this.table.AddColumn(column);
 
             Assert.IsTrue(this.table == column.Table);
-            Assert.AreEqual(0, column.Position);
         }
 
         [TestMethod]
@@ -62,10 +61,10 @@
             this.table.AddColumn(column2);
 
             Assert.IsTrue(this.table == column.Table);
-            Assert.AreEqual(0, column.Position);
+            Assert.AreEqual(0, this.table.GetColumnPosition(column.Name));
 
             Assert.IsTrue(this.table == column2.Table);
-            Assert.AreEqual(1, column2.Position);
+            Assert.AreEqual(1, this.table.GetColumnPosition(column2.Name));
         }
 
         [TestMethod]

@@ -7,13 +7,11 @@
 
     public class IsNullFilter : IRowFilter
     {
-        private Column column;
         private int position;
 
-        public IsNullFilter(Column column)
+        public IsNullFilter(int position)
         {
-            this.column = column;
-            this.position = column.Position;
+            this.position = position;
         }
 
         public Func<Row, bool> RowPredicate { get { return r => r[this.position] == null; } }

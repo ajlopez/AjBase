@@ -19,6 +19,18 @@
                 this[k] = data[k];
         }
 
+        public int ColumnCount { get { return this.data.Length; } }
+
+        public Column GetColumn(int ncolumn)
+        {
+            return this.rowDefinition.GetColumn(ncolumn);
+        }
+
+        public Column GetColumn(string name)
+        {
+            return this.rowDefinition.GetColumn(name);
+        }
+
         public object this[int index]
         {
             get { return this.data[index]; }
@@ -27,8 +39,8 @@
 
         public object this[string columnName]
         {
-            get { return this[this.rowDefinition.GetColumn(columnName).Position]; }
-            set { this[this.rowDefinition.GetColumn(columnName).Position] = value; }
+            get { return this[this.rowDefinition.GetColumnPosition(columnName)]; }
+            set { this[this.rowDefinition.GetColumnPosition(columnName)] = value; }
         }
     }
 }

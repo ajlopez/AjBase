@@ -31,7 +31,7 @@
         public void AddColumn(Column column)
         {
             this.columns.Add(column);
-            column.SetTable(this, this.columns.Count - 1);
+            column.SetTable(this);
         }
 
         public Column GetColumn(string name)
@@ -42,6 +42,12 @@
         public Column GetColumn(int ncol)
         {
             return this.columns[ncol];
+        }
+
+        public int GetColumnPosition(string name)
+        {
+            Column column = this.GetColumn(name);
+            return this.columns.IndexOf(column);
         }
 
         public Row GetRow(int nrow)

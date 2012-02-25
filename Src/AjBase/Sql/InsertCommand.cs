@@ -47,8 +47,7 @@
 
                 for (int k = 0; k < this.columnNames.Count; k++)
                 {
-                    Column column = table.GetColumn(this.columnNames[k]);
-                    allValues[column.Position] = this.values[k];
+                    allValues[table.GetColumnPosition(this.columnNames[k])] = this.values[k];
                 }
 
                 table.AddRow(allValues);

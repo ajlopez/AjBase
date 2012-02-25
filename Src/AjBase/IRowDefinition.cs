@@ -7,5 +7,6 @@
         int ColumnCount { get; }
         Column GetColumn(string name);
         Column GetColumn(int ncol);
+        int GetColumnPosition(string name);
     }
 }

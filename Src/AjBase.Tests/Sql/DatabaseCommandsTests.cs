@@ -1,4 +1,4 @@
-﻿namespace AjBase.Tests
+﻿namespace AjBase.Tests.Sql
 {
     using System;
     using System.Text;

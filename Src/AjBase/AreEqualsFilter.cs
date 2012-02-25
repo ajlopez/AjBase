@@ -7,15 +7,13 @@
 
     public class AreEqualsFilter : IRowFilter
     {
-        private Column column;
         private object value;
         private int position;
 
-        public AreEqualsFilter(Column column, object value)
+        public AreEqualsFilter(int position, object value)
         {
-            this.column = column;
             this.value = value;
-            this.position = column.Position;
+            this.position = position;
         }
 
         public Func<Row, bool> RowPredicate { get { return this.AreEquals; } }

@@ -146,12 +146,36 @@
 
         private ICommand ParseSelect()
         {
-            this.Parse("*", TokenType.Operator);
+            IList<string> columns = null;
+
+            if (this.TryPeekName())
+                columns = this.ParseColumnNames();
+            else
+                this.Parse("*", TokenType.Operator);
+
             this.Parse("from", TokenType.Name);
 
             string tableName = this.ParseName();
 
-            return new SelectCommand(tableName);
+            var cmd = new SelectCommand(tableName);
+
+            if (columns != null)
+                foreach (var field in columns)
+                    cmd.AddColumn(field);
+
+            return cmd;
+        }
+
+        private IList<string> ParseColumnNames()
+        {
+            IList<string> names = new List<string>();
+
+            names.Add(this.ParseName());
+
+            while (this.TryParse(",", TokenType.Separator))
+                names.Add(this.ParseName());
+
+            return names;
         }
 
         private bool TryPeekName()

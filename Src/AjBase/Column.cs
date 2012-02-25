@@ -29,15 +29,12 @@
 
         public Type Type { get { return this.type; } }
 
-        public int Position { get { return this.position; } }
-
-        internal void SetTable(Table table, int position)
+        internal void SetTable(Table table)
         {
             if (this.table != null)
                 throw new InvalidOperationException(string.Format("Column '{0}' is associated to Table '{1}'", this.name, this.table.Name));
 
             this.table = table;
-            this.position = position;
         }
     }
 }
