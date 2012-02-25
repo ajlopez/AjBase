@@ -45,6 +45,11 @@
             get { return this.GetConnectionValue("Database"); }
         }
 
+        internal Database GetDatabase()
+        {
+            return this.database;
+        }
+
         public override void Open()
         {
             string dbname = this.GetConnectionValue("Database");

@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ColumnTests.cs" />
+    <Compile Include="Data\AjBaseCommandTests.cs" />
     <Compile Include="Sql\SelectCommandsTests.cs" />
     <Compile Include="Sql\DatabaseCommandsTests.cs" />
     <Compile Include="Data\AjBaseConnectionTests.cs" />
